@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ManghWa – Read the Best Manga & Manhwa Online</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="ManghWa – Discover and read the best manga, manhwa and manhua online for free. New chapters updated daily. Join thousands of readers worldwide." />
+  <meta name="keywords" content="manga, manhwa, manhua, read manga online, free manga, manga site, anime, comics" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ManghWa" />
+  <link rel="canonical" href="https://manghwa.com/" />
+
+  <!-- Open Graph (for sharing on social media / Google Preview) -->
+  <meta property="og:title" content="ManghWa – Read the Best Manga & Manhwa Online" />
+  <meta property="og:description" content="Discover and read thousands of manga and manhwa titles for free. New chapters daily." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://manghwa.com/" />
+  <meta property="og:image" content="https://manghwa.com/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ManghWa – Read the Best Manga & Manhwa Online" />
+  <meta name="twitter:description" content="Discover and read thousands of manga and manhwa titles for free." />
+
+  <!-- Structured Data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ManghWa",
+    "url": "https://manghwa.com",
+    "description": "Read the best manga and manhwa online for free",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://manghwa.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink: #0a0a0f;
+      --paper: #f5f0e8;
+      --accent: #c8392b;
+      --accent2: #e8a020;
+      --muted: #6b6558;
+      --border: #d4cfc4;
+      --card-bg: #faf7f2;
+      --panel-bg: #1a1a24;
+      --panel-text: #e8e4dc;
+      --red: #c8392b;
+      --gold: #c8960a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Crimson Pro', Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--ink);
+      color: var(--panel-text);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+      color: var(--paper);
+      cursor: pointer;
+      user-select: none;
+    }
+    .logo span { color: var(--accent); }
+
+    nav { display: flex; gap: 1.5rem; align-items: center; }
+
+    nav a, .nav-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--panel-text);
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.3rem 0;
+      transition: color 0.2s;
+      opacity: 0.8;
+    }
+    nav a:hover, .nav-btn:hover { color: var(--accent); opacity: 1; }
+
+    .nav-user {
+      display: flex; gap: 0.75rem; align-items: center;
+    }
+
+    .btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border: 1.5px solid currentColor;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: none;
+    }
+    .btn-outline { color: var(--panel-text); border-color: rgba(255,255,255,0.3); }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); }
+    .btn-red { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-red:hover { background: #a82d22; border-color: #a82d22; }
+    .btn-gold { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .btn-gold:hover { background: #a07808; border-color: #a07808; }
+
+    /* ── HERO SEARCH ── */
+    .hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 4rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(200,57,43,0.18) 0%, transparent 70%),
+                  radial-gradient(ellipse at 30% 70%, rgba(200,150,10,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      position: relative; z-index: 1;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(245,240,232,0.6);
+      margin: 0.75rem 0 2rem;
+      font-style: italic;
+      position: relative; z-index: 1;
+    }
+
+    .search-bar {
+      display: flex;
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.85rem 1.25rem;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.05rem;
+      background: rgba(245,240,232,0.08);
+      border: 1.5px solid rgba(245,240,232,0.2);
+      border-right: none;
+      color: var(--paper);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-bar input::placeholder { color: rgba(245,240,232,0.35); }
+    .search-bar input:focus { border-color: var(--accent); }
+    .search-bar button {
+      padding: 0.85rem 1.5rem;
+      background: var(--accent);
+      color: #fff;
+      border: 1.5px solid var(--accent);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .search-bar button:hover { background: #a82d22; }
+
+    /* ── GENRE PILLS ── */
+    .genre-pills {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      position: relative; z-index: 1;
+    }
+    .pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border: 1px solid rgba(245,240,232,0.2);
+      color: rgba(245,240,232,0.5);
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+    .pill:hover { border-color: var(--accent); color: var(--paper); }
+    .pill.active { border-color: var(--accent); color: var(--accent); }
+
+    /* ── MAIN LAYOUT ── */
+    main { max-width: 1300px; margin: 0 auto; padding: 2.5rem 2rem; }
+
+    .section-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.5rem;
+    }
+    .section-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+    }
+    .section-header a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* ── MANGA GRID ── */
+    .manga-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .manga-card {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .manga-card:hover { transform: translateY(-4px); }
+    .manga-card:hover .card-cover::after { opacity: 1; }
+
+    .card-cover {
+      aspect-ratio: 2/3;
+      overflow: hidden;
+      position: relative;
+      background: var(--border);
+    }
+    .card-cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-cover::after {
+      content: 'READ';
+      position: absolute; inset: 0;
+      background: rgba(200,57,43,0.85);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .card-badge {
+      position: absolute;
+      top: 0.4rem; left: 0.4rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.15rem 0.4rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .card-badge.ongoing { background: #1a8c4e; }
+    .card-badge.completed { background: var(--muted); }
+
+    .card-info { padding: 0.6rem 0; }
+    .card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── FEATURED (wide card) ── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .featured-card {
+      position: relative;
+      aspect-ratio: 16/7;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .featured-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+      transition: transform 0.4s;
+    }
+    .featured-card:hover img { transform: scale(1.04); }
+    .featured-card .overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(transparent, rgba(10,10,15,0.92));
+      color: #fff;
+    }
+    .featured-card .overlay h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
+    }
+    .featured-card .overlay p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      font-style: italic;
+      margin-top: 0.25rem;
+    }
+
+    /* ── MANGA READER VIEW ── */
+    #reader-view {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .reader-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .reader-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; }
+    .back-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      text-decoration: underline;
+    }
+
+    .reader-info {
+      display: flex; gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .reader-cover {
+      width: 160px;
+      flex-shrink: 0;
+    }
+    .reader-cover img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+    }
+    .reader-details { flex: 1; }
+    .reader-details h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+    .reader-details .genre-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin: 0.6rem 0;
+    }
+    .genre-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .reader-desc { font-size: 1rem; line-height: 1.65; color: #333; margin: 0.75rem 0 1rem; }
+    .reader-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    .chapters-list { margin: 1.5rem 0; }
+    .chapters-list h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .chapter-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.65rem 1rem;
+      border: 1px solid var(--border);
+      margin-bottom: 0.35rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      background: var(--card-bg);
+    }
+    .chapter-item:hover { background: var(--border); }
+    .chapter-item .ch-title { font-size: 0.95rem; font-weight: 600; }
+    .chapter-item .ch-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .chapter-read { color: var(--muted); }
+
+    /* ── COMMENTS ── */
+    .comments-section { margin-top: 2.5rem; }
+    .comments-section h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 0.4rem;
+    }
+    .comment-form { margin-bottom: 1.5rem; }
+    .comment-form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      resize: vertical;
+      min-height: 80px;
+      outline: none;
+    }
+    .comment-form textarea:focus { border-color: var(--accent); }
+    .comment-form .form-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 0.5rem;
+    }
+    .comment-form small { font-style: italic; color: var(--muted); font-size: 0.85rem; }
+
+    .comment {
+      padding: 1rem;
+      border-left: 3px solid var(--border);
+      margin-bottom: 1rem;
+      background: var(--card-bg);
+    }
+    .comment.admin-comment { border-left-color: var(--accent); }
+    .comment-header {
+      display: flex; justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+    .comment-author {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .comment-author.is-admin { color: var(--accent); }
+    .comment-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .comment-body { font-size: 0.95rem; line-height: 1.6; }
+
+    /* ── MODAL (Auth / Admin) ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(10,10,15,0.75);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      width: 100%;
+      max-width: 440px;
+      padding: 2.5rem;
+      position: relative;
+      animation: slideUp 0.25s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1.25rem;
+      font-size: 1.3rem; cursor: pointer; color: var(--muted);
+      background: none; border: none;
+    }
+    .modal-close:hover { color: var(--accent); }
+    .modal h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.5rem;
+    }
+    .modal-tabs {
+      display: flex; gap: 0; margin-bottom: 1.5rem;
+    }
+    .modal-tab {
+      flex: 1;
+      padding: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: center;
+      cursor: pointer;
+      background: none;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .modal-tab.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      outline: none;
+      transition: border-color 0.2s;
+      color: var(--ink);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+
+    .form-error {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      margin-top: 0.4rem;
+    }
+
+    /* ── ADMIN PANEL ── */
+    #admin-view {
+      display: none;
+    }
+    .admin-panel {
+      background: var(--panel-bg);
+      color: var(--panel-text);
+      padding: 2.5rem;
+      border: 2px solid var(--accent);
+    }
+    .admin-panel h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+    }
+    .admin-tabs {
+      display: flex; gap: 0.5rem; margin-bottom: 2rem;
+    }
+    .admin-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      background: none;
+      transition: all 0.2s;
+    }
+    .admin-tab.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(200,57,43,0.1);
+    }
+    .admin-content label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 0.35rem;
+    }
+    .admin-content input,
+    .admin-content select,
+    .admin-content textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: var(--panel-text);
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .admin-content input:focus,
+    .admin-content select:focus,
+    .admin-content textarea:focus { border-color: var(--accent); }
+    .admin-content textarea { min-height: 100px; resize: vertical; }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .admin-success {
+      background: rgba(26,140,78,0.15);
+      border: 1px solid #1a8c4e;
+      color: #4ddb8a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.6rem 1rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .manga-list-admin {
+      margin-top: 1.5rem;
+    }
+    .manga-list-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 0.4rem;
+    }
+    .manga-list-item span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--panel-text);
+    }
+    .delete-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.25rem 0.6rem;
+      background: rgba(200,57,43,0.2);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background 0.15s;
+    }
+    .delete-btn:hover { background: rgba(200,57,43,0.4); }
+
+    /* ── LIBRARY ── */
+    #library-view { display: none; }
+    .library-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+    .library-empty .big-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.85rem 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      border-left: 3px solid var(--accent);
+      z-index: 1000;
+      transform: translateX(200%);
+      transition: transform 0.3s;
+      max-width: 320px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.success { border-left-color: #1a8c4e; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(245,240,232,0.35);
+      padding: 3rem 2rem 2rem;
+      margin-top: 4rem;
+    }
+    .footer-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+    .footer-brand .logo { font-size: 1.6rem; margin-bottom: 0.75rem; display: block; }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.6; }
+    footer h5 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.6);
+      margin-bottom: 1rem;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 0.5rem; }
+    footer ul a {
+      color: rgba(245,240,232,0.4);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    footer ul a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(245,240,232,0.1);
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── CHAPTER PAGES ── */
+    .chapter-pages {
+      margin: 1.5rem 0;
+    }
+    .chapter-pages img {
+      width: 100%;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .chapter-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 0;
+      border-top: 2px solid var(--ink);
+      margin-top: 1rem;
+    }
+
+    /* ── SEARCH RESULTS ── */
+    .search-results-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .search-results-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+    }
+    .search-results-header p {
+      font-style: italic;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+    .no-results big {
+      display: block; font-size: 3rem; margin-bottom: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .featured-grid { grid-template-columns: 1fr; }
+      .admin-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .reader-info { flex-direction: column; }
+      .reader-cover { width: 120px; }
+      header { padding: 0 1rem; }
+      main { padding: 1.5rem 1rem; }
+    }
+    @media (max-width: 480px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      nav a { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ HEADER ═══════════════════════════════════ -->
+<header>
+  <div class="logo" onclick="showView('home')">Mang<span>hWa</span></div>
+  <nav>
+    <a onclick="showView('home')">Browse</a>
+    <a onclick="showGenre('Action')">New</a>
+    <a onclick="showView('library')">Library</a>
+    <div class="nav-user" id="nav-user">
+      <button class="btn btn-outline" onclick="openModal('login')">Sign In</button>
+      <button class="btn btn-red" onclick="openModal('register')">Join Free</button>
+    </div>
+    <div class="nav-user" id="nav-logged" style="display:none;">
+      <span id="nav-username" class="nav-btn" style="opacity:1; cursor:default;"></span>
+      <button class="nav-btn" onclick="showView('library')">Library</button>
+      <button class="nav-btn admin-only" style="display:none;" onclick="showView('admin')">Admin</button>
+      <button class="btn btn-outline" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════ TOAST ═══════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════ AUTH MODAL ═══════════════════════════════════ -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('auth-modal')">✕</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+      <button class="modal-tab" id="tab-register" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login -->
+    <div id="login-form">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" />
+      </div>
+      <div class="form-error" id="login-error"></div>
+      <br/>
+      <button class="btn btn-red" style="width:100%;padding:0.75rem;" onclick="doLogin()">Sign In</button>
+    </div>
+
+    <!-- Register -->
+    <div id="register-form" style="display:none;">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="reg-username" placeholder="MangaLover99" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="••••••••" />
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="reg-confirm" placeholder="••••••••" />
+      </div>
+      <div class="form-error" id="reg-error"></div>
+      <br/>
+      <button class="btn btn-red" style="width:100%;padding:0.75rem;" onclick="doRegister()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ HOME VIEW ═══════════════════════════════════ -->
+<div id="home-view">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Read <span>Manga</span><br/>Anywhere</h1>
+    <p>Thousands of titles. New chapters every day.</p>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search manga, manhwa, manhua…" 
+             onkeydown="if(event.key==='Enter') doSearch()" />
+      <button onclick="doSearch()">Search</button>
+    </div>
+    <div class="genre-pills">
+      <span class="pill" onclick="showGenre('Action')">Action</span>
+      <span class="pill" onclick="showGenre('Romance')">Romance</span>
+      <span class="pill" onclick="showGenre('Fantasy')">Fantasy</span>
+      <span class="pill" onclick="showGenre('Horror')">Horror</span>
+      <span class="pill" onclick="showGenre('Comedy')">Comedy</span>
+      <span class="pill" onclick="showGenre('Sci-Fi')">Sci-Fi</span>
+      <span class="pill" onclick="showGenre('Slice of Life')">Slice of Life</span>
+      <span class="pill" onclick="showGenre('Thriller')">Thriller</span>
+    </div>
+  </div>
+
+  <main>
+    <!-- Featured -->
+    <div class="section-header"><h2>Featured</h2></div>
+    <div class="featured-grid" id="featured-grid"></div>
+
+    <!-- Latest -->
+    <div class="section-header">
+      <h2>Latest Updates</h2>
+      <a onclick="doSearch('')">View All →</a>
+    </div>
+    <div class="manga-grid" id="latest-grid"></div>
+
+    <!-- Popular -->
+    <div class="section-header" style="margin-top:3rem;">
+      <h2>Popular Now</h2>
+    </div>
+    <div class="manga-grid" id="popular-grid"></div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════ SEARCH RESULTS VIEW ═══════════════════════════════════ -->
+<div id="search-view" style="display:none;">
+  <main>
+    <div class="search-results-header">
+      <h2 id="search-title">Search Results</h2>
+      <p id="search-subtitle"></p>
+    </div>
+    <div class="manga-grid" id="search-grid"></div>
+    <div class="no-results" id="no-results" style="display:none;">
+      <big>🔍</big>
+      <p>No manga found for this search.</p>
+      <br/>
+      <button class="btn btn-red" onclick="showView('home')">Back to Browse</button>
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════ READER VIEW ═══════════════════════════════════ -->
+<div id="reader-view">
+  <main>
+    <div class="reader-header">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <h2 id="reader-title"></h2>
+    </div>
+    <div id="reader-content"></div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════ LIBRARY VIEW ═══════════════════════════════════ -->
+<div id="library-view" style="display:none;">
+  <main>
+    <div class="section-header"><h2>My Library</h2></div>
+    <div id="library-content"></div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════ ADMIN VIEW ═══════════════════════════════════ -->
+<div id="admin-view" style="display:none;">
+  <main>
+    <div class="admin-panel">
+      <h2>⚙ Admin Dashboard</h2>
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="adminTab('publish')">Publish Manga</button>
+        <button class="admin-tab" onclick="adminTab('chapters')">Add Chapter</button>
+        <button class="admin-tab" onclick="adminTab('manage')">Manage Library</button>
+      </div>
+
+      <!-- Publish Manga -->
+      <div id="admin-publish" class="admin-content">
+        <div class="admin-success" id="publish-success">✓ Manga published successfully!</div>
+        <div class="admin-grid">
+          <div>
+            <label>Manga Title *</label>
+            <input type="text" id="pub-title" placeholder="e.g. Solo Leveling" />
+            <label>Author</label>
+            <input type="text" id="pub-author" placeholder="Author name" />
+            <label>Status</label>
+            <select id="pub-status">
+              <option value="ongoing">Ongoing</option>
+              <option value="completed">Completed</option>
+              <option value="hiatus">Hiatus</option>
+            </select>
+            <label>Type</label>
+            <select id="pub-type">
+              <option value="Manga">Manga</option>
+              <option value="Manhwa">Manhwa</option>
+              <option value="Manhua">Manhua</option>
+            </select>
+          </div>
+          <div>
+            <label>Genres (comma-separated)</label>
+            <input type="text" id="pub-genres" placeholder="Action, Fantasy, Adventure" />
+            <label>Cover Image URL</label>
+            <input type="text" id="pub-cover" placeholder="https://..." />
+            <label>Description</label>
+            <textarea id="pub-desc" placeholder="Write a captivating synopsis..."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-red" style="padding:0.75rem 2rem;" onclick="publishManga()">Publish Manga</button>
+      </div>
+
+      <!-- Add Chapter -->
+      <div id="admin-chapters" class="admin-content" style="display:none;">
+        <div class="admin-success" id="chapter-success">✓ Chapter added!</div>
+        <label>Select Manga *</label>
+        <select id="ch-manga-select"></select>
+        <div class="admin-grid">
+          <div>
+            <label>Chapter Number *</label>
+            <input type="number" id="ch-number" placeholder="e.g. 1" />
+            <label>Chapter Title</label>
+            <input type="text" id="ch-title" placeholder="e.g. The Awakening" />
+          </div>
+          <div>
+            <label>Chapter Pages (image URLs, one per line)</label>
+            <textarea id="ch-pages" placeholder="https://img.example.com/page1.jpg&#10;https://img.example.com/page2.jpg" style="min-height:140px;"></textarea>
+          </div>
+        </div>
+        <button class="btn btn-red" style="padding:0.75rem 2rem;" onclick="addChapter()">Add Chapter</button>
+      </div>
+
+      <!-- Manage -->
+      <div id="admin-manage" class="admin-content" style="display:none;">
+        <p style="color:rgba(255,255,255,0.5); font-style:italic; margin-bottom:1rem; font-size:0.9rem;">All published manga</p>
+        <div class="manga-list-admin" id="admin-manga-list"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo">Mang<span style="color:var(--accent)">hWa</span></span>
+      <p>Your home for manga, manhwa, and manhua. Read thousands of titles online for free, updated daily.</p>
+    </div>
+    <div>
+      <h5>Browse</h5>
+      <ul>
+        <li><a onclick="showGenre('Action')">Action</a></li>
+        <li><a onclick="showGenre('Romance')">Romance</a></li>
+        <li><a onclick="showGenre('Fantasy')">Fantasy</a></li>
+        <li><a onclick="showGenre('Horror')">Horror</a></li>
+        <li><a onclick="showGenre('Comedy')">Comedy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Account</h5>
+      <ul>
+        <li><a onclick="openModal('register')">Sign Up</a></li>
+        <li><a onclick="openModal('login')">Login</a></li>
+        <li><a onclick="showView('library')">My Library</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Site</h5>
+      <ul>
+        <li><a>About</a></li>
+        <li><a>Contact</a></li>
+        <li><a>DMCA</a></li>
+        <li><a>Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ManghWa. All rights reserved.</span>
+    <span>MANGA · MANHWA · MANHUA</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════ FIREBASE + SCRIPT ═══════════════════════════════════ -->
+<script type="module">
+/* ─── FIREBASE SETUP ─── */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, addDoc, deleteDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBaskKhPrxur0mO2fKQ6U3FWKNj82OBLuc",
+  authDomain: "manghwa-b0e6b.firebaseapp.com",
+  projectId: "manghwa-b0e6b",
+  storageBucket: "manghwa-b0e6b.firebasestorage.app",
+  messagingSenderId: "559826465631",
+  appId: "1:559826465631:web:be4ec76edb4011dd7efcea"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+
+const ADMIN_EMAIL = "riiry161@gmail.com";
+
+/* ─── EXPOSE FUNCTIONS GLOBALLY (needed for onclick in HTML with type=module) ─── */
+// These will be assigned after function declarations via Object.assign at bottom
+// For now, create stubs that work immediately
+window.__fw = {}; // forward declarations holder
+
+/* ─── DATA STORE ─── */
+
+let state = {
+  currentUser: JSON.parse(localStorage.getItem('mw_user') || 'null'),
+  manga: JSON.parse(localStorage.getItem('mw_manga') || 'null'),
+  users: JSON.parse(localStorage.getItem('mw_users') || '[]'),
+  currentView: 'home',
+  viewHistory: [],
+  currentMangaId: null,
+};
+
+// Init default manga if none
+if (!state.manga) {
+  state.manga = [
+    {
+      id: 1,
+      title: "Shadow Monarch",
+      author: "H. Jae-Ho",
+      type: "Manhwa",
+      status: "ongoing",
+      genres: ["Action","Fantasy","Adventure"],
+      cover: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&q=80",
+      description: "After years of being the weakest hunter, Sung Jin-Woo awakens a mysterious System that allows him to grow without limits. Now he walks the path of shadows...",
+      chapters: [
+        { number: 1, title: "The Weakest Hunter", date: "2025-01-10", pages: ["https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&q=80","https://images.unsplash.com/photo-1613896640119-800c1e0b2d02?w=800&q=80"] },
+        { number: 2, title: "The System Awakens", date: "2025-01-17", pages: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80"] },
+        { number: 3, title: "First Quest", date: "2025-01-24", pages: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80"] },
+      ],
+      views: 152000,
+      comments: [{ user: "Admin", isAdmin: true, text: "Welcome to Shadow Monarch! New chapters every Friday.", date: "2025-01-10" }],
+    },
+    {
+      id: 2,
+      title: "The Last Alchemist",
+      author: "Kim Soo-Jin",
+      type: "Manhwa",
+      status: "ongoing",
+      genres: ["Fantasy","Romance","Magic"],
+      cover: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&q=80",
+      description: "In a world where alchemy is forbidden, Elena must hide her extraordinary gift while uncovering the conspiracy that destroyed her family.",
+      chapters: [
+        { number: 1, title: "The Forbidden Art", date: "2025-02-01", pages: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80"] },
+        { number: 2, title: "A Hidden Past", date: "2025-02-08", pages: ["https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80"] },
+      ],
+      views: 89400,
+      comments: [],
+    },
+    {
+      id: 3,
+      title: "Crimson Blade",
+      author: "Taro Yamamoto",
+      type: "Manga",
+      status: "completed",
+      genres: ["Action","Samurai","Historical"],
+      cover: "https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?w=400&q=80",
+      description: "A ronin with a cursed blade wanders feudal Japan seeking redemption, leaving a trail of blood and broken chains behind him.",
+      chapters: [
+        { number: 1, title: "The Red Dawn", date: "2024-06-01", pages: ["https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=80"] },
+        { number: 2, title: "Valley of Shadows", date: "2024-06-08", pages: ["https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=800&q=80"] },
+        { number: 3, title: "The Final Cut", date: "2024-06-15", pages: ["https://images.unsplash.com/photo-1416339684178-3a239570f315?w=800&q=80"] },
+      ],
+      views: 201000,
+      comments: [{ user: "Reader88", isAdmin: false, text: "Absolutely stunning artwork. Best samurai manga I've read!", date: "2024-07-02" }],
+    },
+    {
+      id: 4,
+      title: "Neon Echo",
+      author: "Lin Wei",
+      type: "Manhua",
+      status: "ongoing",
+      genres: ["Sci-Fi","Cyberpunk","Thriller"],
+      cover: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+      description: "In Neo Shanghai 2187, hacker Zara uploads her consciousness into the city's AI grid — and discovers the city is alive.",
+      chapters: [
+        { number: 1, title: "Jacked In", date: "2025-03-01", pages: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"] },
+      ],
+      views: 44200,
+      comments: [],
+    },
+    {
+      id: 5,
+      title: "Sweet Ramen",
+      author: "Park Ji-Young",
+      type: "Manhwa",
+      status: "ongoing",
+      genres: ["Romance","Slice of Life","Comedy"],
+      cover: "https://images.unsplash.com/photo-1557872943-16a5ac26437e?w=400&q=80",
+      description: "A grumpy chef and an overly enthusiastic food critic find themselves stuck in the same tiny apartment. Chaos and something warmer follow.",
+      chapters: [
+        { number: 1, title: "Neighbor from Hell", date: "2025-02-14", pages: ["https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80"] },
+        { number: 2, title: "The Ramen Test", date: "2025-02-21", pages: ["https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80"] },
+      ],
+      views: 67800,
+      comments: [],
+    },
+    {
+      id: 6,
+      title: "Void Hunters",
+      author: "Ren Akira",
+      type: "Manga",
+      status: "ongoing",
+      genres: ["Sci-Fi","Action","Horror"],
+      cover: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
+      description: "When creatures from the void begin consuming stars, a squad of elite hunters must dive into the darkness between galaxies.",
+      chapters: [
+        { number: 1, title: "Into the Void", date: "2025-01-05", pages: ["https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&q=80"] },
+        { number: 2, title: "Eaten Stars", date: "2025-01-12", pages: ["https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&q=80"] },
+      ],
+      views: 93100,
+      comments: [],
+    },
+  ];
+  saveData();
+}
+
+function saveData() {
+  // Manga still saved locally for speed; for full cloud sync use Firestore
+  localStorage.setItem('mw_manga', JSON.stringify(state.manga));
+}
+
+async function saveUserToFirestore() {
+  if (!state.currentUser || !state.currentUser.uid) return;
+  try {
+    await setDoc(doc(db, 'users', state.currentUser.uid), {
+      username: state.currentUser.username,
+      email: state.currentUser.email,
+      library: state.currentUser.library || [],
+    }, { merge: true });
+  } catch(e) { console.error('Firestore save error:', e); }
+}
+
+/* ─── VIEW SYSTEM ─── */
+const views = ['home-view','search-view','reader-view','library-view','admin-view'];
+
+function showView(name, push = true) {
+  if (push && state.currentView !== name) state.viewHistory.push(state.currentView);
+  state.currentView = name;
+  views.forEach(v => document.getElementById(v).style.display = 'none');
+
+  if (name === 'home') {
+    document.getElementById('home-view').style.display = 'block';
+    renderHome();
+  } else if (name === 'search') {
+    document.getElementById('search-view').style.display = 'block';
+  } else if (name === 'reader') {
+    document.getElementById('reader-view').style.display = 'block';
+  } else if (name === 'library') {
+    document.getElementById('library-view').style.display = 'block';
+    renderLibrary();
+  } else if (name === 'admin') {
+    if (!isAdmin()) { showToast('Admin access required.', 'error'); return; }
+    document.getElementById('admin-view').style.display = 'block';
+    renderAdminManage();
+    populateChapterSelect();
+  }
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  const prev = state.viewHistory.pop() || 'home';
+  showView(prev, false);
+}
+
+/* ─── AUTH (Firebase) ─── */
+function isLoggedIn() { return !!state.currentUser; }
+function isAdmin() { return state.currentUser && state.currentUser.isAdmin; }
+
+function openModal(tab) {
+  document.getElementById('auth-modal').classList.add('open');
+  switchTab(tab);
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function switchTab(tab) {
+  document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
+  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+  document.getElementById('login-error').textContent = '';
+  document.getElementById('reg-error').textContent = '';
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  errEl.textContent = 'Signing in...';
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, pass);
+    const userDoc = await getDoc(doc(db, 'users', cred.user.uid));
+    const userData = userDoc.exists() ? userDoc.data() : { username: email.split('@')[0], library: [] };
+    state.currentUser = {
+      uid: cred.user.uid,
+      email,
+      username: userData.username || email.split('@')[0],
+      isAdmin: email === ADMIN_EMAIL,
+      library: userData.library || [],
+    };
+    errEl.textContent = '';
+    updateNavUser();
+    closeModal('auth-modal');
+    showToast('Welcome back, ' + state.currentUser.username + '!', 'success');
+  } catch(e) {
+    errEl.textContent = 'Invalid email or password.';
+  }
+}
+
+async function doRegister() {
+  const username = document.getElementById('reg-username').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('reg-confirm').value;
+  const errEl = document.getElementById('reg-error');
+
+  if (!username || !email || !pass) { errEl.textContent = 'All fields are required.'; return; }
+  if (pass !== confirm) { errEl.textContent = 'Passwords do not match.'; return; }
+  if (pass.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
+  if (email === ADMIN_EMAIL) { errEl.textContent = 'This email is not available.'; return; }
+  errEl.textContent = 'Creating account...';
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await setDoc(doc(db, 'users', cred.user.uid), { username, email, library: [] });
+    state.currentUser = { uid: cred.user.uid, email, username, isAdmin: false, library: [] };
+    errEl.textContent = '';
+    updateNavUser();
+    closeModal('auth-modal');
+    showToast('Account created! Welcome, ' + username + '!', 'success');
+  } catch(e) {
+    if (e.code === 'auth/email-already-in-use') errEl.textContent = 'Email already registered.';
+    else errEl.textContent = 'Error: ' + e.message;
+  }
+}
+
+async function logout() {
+  await signOut(auth);
+  state.currentUser = null;
+  updateNavUser();
+  showView('home');
+  showToast('Logged out successfully.');
+}
+
+function updateNavUser() {
+  const loggedIn = isLoggedIn();
+  document.getElementById('nav-user').style.display = loggedIn ? 'none' : 'flex';
+  document.getElementById('nav-logged').style.display = loggedIn ? 'flex' : 'none';
+  if (loggedIn) {
+    document.getElementById('nav-username').textContent = state.currentUser.username;
+    const adminBtns = document.querySelectorAll('.admin-only');
+    adminBtns.forEach(b => b.style.display = isAdmin() ? '' : 'none');
+  }
+}
+
+// Auto-restore session on page load
+onAuthStateChanged(auth, async (user) => {
+  if (user && !state.currentUser) {
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    const userData = userDoc.exists() ? userDoc.data() : { username: user.email.split('@')[0], library: [] };
+    state.currentUser = {
+      uid: user.uid,
+      email: user.email,
+      username: userData.username || user.email.split('@')[0],
+      isAdmin: user.email === ADMIN_EMAIL,
+      library: userData.library || [],
+    };
+    updateNavUser();
+  }
+});
+
+/* ─── RENDER HOME ─── */
+function renderHome() {
+  renderFeatured();
+  renderGrid('latest-grid', [...state.manga].reverse().slice(0, 6));
+  renderGrid('popular-grid', [...state.manga].sort((a,b) => b.views - a.views).slice(0, 6));
+}
+
+function renderFeatured() {
+  const el = document.getElementById('featured-grid');
+  const featured = state.manga.slice(0, 2);
+  el.innerHTML = featured.map(m => `
+    <div class="featured-card" onclick="openManga(${m.id})">
+      <img src="${m.cover}" alt="${m.title}" loading="lazy" />
+      <div class="overlay">
+        <h3>${m.title}</h3>
+        <p>${m.type} · ${m.chapters.length} Chapters · ${formatViews(m.views)} Views</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderGrid(elId, manga) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = manga.map(m => mangaCard(m)).join('');
+}
+
+function mangaCard(m) {
+  return `
+    <div class="manga-card" onclick="openManga(${m.id})">
+      <div class="card-cover">
+        <img src="${m.cover}" alt="${m.title}" loading="lazy" />
+        <span class="card-badge ${m.status}">${m.status.charAt(0).toUpperCase()+m.status.slice(1)}</span>
+      </div>
+      <div class="card-info">
+        <div class="card-title">${m.title}</div>
+        <div class="card-meta">${m.type} · Ch.${m.chapters.length} · ${formatViews(m.views)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function formatViews(n) {
+  if (n >= 1000000) return (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n/1000).toFixed(1) + 'K';
+  return n;
+}
+
+/* ─── SEARCH ─── */
+function doSearch(override) {
+  const q = override !== undefined ? override : document.getElementById('search-input').value.trim().toLowerCase();
+  const results = state.manga.filter(m =>
+    m.title.toLowerCase().includes(q) ||
+    m.author.toLowerCase().includes(q) ||
+    m.genres.some(g => g.toLowerCase().includes(q)) ||
+    m.type.toLowerCase().includes(q)
+  );
+
+  document.getElementById('search-title').textContent = q ? `Results for "${q}"` : 'All Manga';
+  document.getElementById('search-subtitle').textContent = `${results.length} title${results.length !== 1 ? 's' : ''} found`;
+  document.getElementById('no-results').style.display = results.length === 0 ? 'block' : 'none';
+  renderGrid('search-grid', results);
+  showView('search');
+}
+
+function showGenre(g) {
+  document.getElementById('search-input').value = g;
+  doSearch(g.toLowerCase());
+}
+
+/* ─── MANGA READER ─── */
+function openManga(id) {
+  const manga = state.manga.find(m => m.id === id);
+  if (!manga) return;
+  state.currentMangaId = id;
+  manga.views++;
+  saveData();
+
+  const isInLib = isLoggedIn() && state.currentUser.library && state.currentUser.library.includes(id);
+
+  document.getElementById('reader-title').textContent = manga.title;
+  document.getElementById('reader-content').innerHTML = `
+    <div class="reader-info">
+      <div class="reader-cover">
+        <img src="${manga.cover}" alt="${manga.title}" />
+      </div>
+      <div class="reader-details">
+        <h3>${manga.title}</h3>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.3rem;">
+          by ${manga.author} · ${manga.type} · <span style="color:${manga.status==='ongoing'?'#1a8c4e':'var(--muted)'}">
+          ${manga.status.charAt(0).toUpperCase()+manga.status.slice(1)}</span>
+        </div>
+        <div class="genre-tags">${manga.genres.map(g=>`<span class="genre-tag">${g}</span>`).join('')}</div>
+        <p class="reader-desc">${manga.description}</p>
+        <div class="reader-actions">
+          ${manga.chapters.length > 0 ? `<button class="btn btn-red" onclick="readChapter(${id},0)">Start Reading</button>` : ''}
+          ${isLoggedIn() ? `
+            <button class="btn ${isInLib ? 'btn-gold' : 'btn-outline'}" id="lib-btn" 
+              onclick="toggleLibrary(${id})" style="color:${isInLib?'':'var(--ink)'}; border-color:${isInLib?'':'var(--border)'};">
+              ${isInLib ? '★ Saved' : '☆ Save'}
+            </button>` : `<button class="btn btn-outline" onclick="openModal('register')" style="color:var(--ink);border-color:var(--border);">☆ Save to Library</button>`}
+        </div>
+      </div>
+    </div>
+
+    <div class="chapters-list">
+      <h4>Chapters (${manga.chapters.length})</h4>
+      ${manga.chapters.length === 0 ? '<p style="color:var(--muted);font-style:italic;">No chapters yet.</p>' :
+        manga.chapters.map((ch, i) => `
+          <div class="chapter-item" onclick="readChapter(${id},${i})">
+            <span class="ch-title">Chapter ${ch.number}: ${ch.title}</span>
+            <span class="ch-date">${ch.date}</span>
+          </div>
+        `).join('')}
+    </div>
+
+    <div class="comments-section">
+      <h4>Comments (${manga.comments.length})</h4>
+      ${isLoggedIn() ? `
+        <div class="comment-form">
+          <textarea id="comment-input" placeholder="Share your thoughts…"></textarea>
+          <div class="form-footer">
+            <small>Be respectful and avoid spoilers.</small>
+            <button class="btn btn-red" onclick="postComment(${id})">Post Comment</button>
+          </div>
+        </div>` : `
+        <div style="padding:1rem;background:var(--card-bg);border:1px solid var(--border);margin-bottom:1rem;font-style:italic;color:var(--muted);">
+          <a onclick="openModal('login')" style="color:var(--accent);cursor:pointer;text-decoration:underline;">Sign in</a> to leave a comment.
+        </div>`}
+      <div id="comments-list">
+        ${manga.comments.length === 0 ? '<p style="color:var(--muted);font-style:italic;">No comments yet. Be the first!</p>' :
+          manga.comments.map(c => commentHTML(c)).join('')}
+      </div>
+    </div>
+  `;
+  showView('reader');
+}
+
+function commentHTML(c) {
+  return `
+    <div class="comment ${c.isAdmin ? 'admin-comment' : ''}">
+      <div class="comment-header">
+        <span class="comment-author ${c.isAdmin ? 'is-admin' : ''}">${c.isAdmin ? '👑 ' : ''}${c.user}</span>
+        <span class="comment-date">${c.date}</span>
+      </div>
+      <div class="comment-body">${escapeHTML(c.text)}</div>
+    </div>
+  `;
+}
+
+function postComment(mangaId) {
+  if (!isLoggedIn()) { openModal('login'); return; }
+  const input = document.getElementById('comment-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const manga = state.manga.find(m => m.id === mangaId);
+  const comment = {
+    user: state.currentUser.username,
+    isAdmin: isAdmin(),
+    text,
+    date: new Date().toISOString().split('T')[0],
+  };
+  manga.comments.push(comment);
+  saveData();
+
+  document.getElementById('comments-list').insertAdjacentHTML('afterbegin', commentHTML(comment));
+  input.value = '';
+  showToast('Comment posted!', 'success');
+}
+
+function toggleLibrary(mangaId) {
+  if (!isLoggedIn()) { openModal('register'); return; }
+  if (!state.currentUser.library) state.currentUser.library = [];
+  const idx = state.currentUser.library.indexOf(mangaId);
+  let inLib;
+  if (idx === -1) {
+    state.currentUser.library.push(mangaId);
+    inLib = true;
+    showToast('Added to your library!', 'success');
+  } else {
+    state.currentUser.library.splice(idx, 1);
+    inLib = false;
+    showToast('Removed from library.');
+  }
+  saveUserToFirestore();
+  saveData();
+
+  const btn = document.getElementById('lib-btn');
+  if (btn) {
+    btn.textContent = inLib ? '★ Saved' : '☆ Save';
+    btn.className = `btn ${inLib ? 'btn-gold' : 'btn-outline'}`;
+    if (!inLib) { btn.style.color = 'var(--ink)'; btn.style.borderColor = 'var(--border)'; }
+    else { btn.style.color = ''; btn.style.borderColor = ''; }
+  }
+}
+
+/* ─── CHAPTER READER ─── */
+function readChapter(mangaId, chapterIndex) {
+  const manga = state.manga.find(m => m.id === mangaId);
+  const ch = manga.chapters[chapterIndex];
+  if (!ch) return;
+
+  document.getElementById('reader-title').textContent = `${manga.title} — Chapter ${ch.number}`;
+  const hasPrev = chapterIndex > 0;
+  const hasNext = chapterIndex < manga.chapters.length - 1;
+
+  document.getElementById('reader-content').innerHTML = `
+    <div style="text-align:center;margin-bottom:1rem;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
+        Chapter ${ch.number}: ${ch.title}
+      </span>
+    </div>
+    <div class="chapter-pages">
+      ${ch.pages.length > 0 ? ch.pages.map(p => `
+        <img src="${p}" alt="Page" loading="lazy" style="width:100%;display:block;margin-bottom:4px;"/>
+      `).join('') : `
+        <div style="padding:4rem;text-align:center;background:var(--card-bg);border:2px dashed var(--border);">
+          <p style="color:var(--muted);font-style:italic;">No pages uploaded for this chapter yet.</p>
+        </div>
+      `}
+    </div>
+    <div class="chapter-nav">
+      ${hasPrev ? `<button class="btn btn-outline" style="color:var(--ink);border-color:var(--border);" onclick="readChapter(${mangaId},${chapterIndex-1})">← Previous</button>` : '<span></span>'}
+      <button class="btn btn-outline" style="color:var(--ink);border-color:var(--border);" onclick="openManga(${mangaId})">↑ Chapter List</button>
+      ${hasNext ? `<button class="btn btn-red" onclick="readChapter(${mangaId},${chapterIndex+1})">Next →</button>` : '<span style="color:var(--muted);font-style:italic;font-size:0.85rem;">Latest chapter</span>'}
+    </div>
+  `;
+  showView('reader');
+}
+
+/* ─── LIBRARY ─── */
+function renderLibrary() {
+  const el = document.getElementById('library-content');
+  if (!isLoggedIn()) {
+    el.innerHTML = `<div class="library-empty"><span class="big-icon">📚</span><p>Sign in to save manga to your personal library.</p><br/><button class="btn btn-red" onclick="openModal('register')">Create Free Account</button></div>`;
+    return;
+  }
+  const lib = state.currentUser.library || [];
+  const saved = state.manga.filter(m => lib.includes(m.id));
+  if (saved.length === 0) {
+    el.innerHTML = `<div class="library-empty"><span class="big-icon">📖</span><p>Your library is empty. Start saving manga you love!</p><br/><button class="btn btn-red" onclick="showView('home')">Browse Manga</button></div>`;
+    return;
+  }
+  el.innerHTML = `<div class="manga-grid">${saved.map(m => mangaCard(m)).join('')}</div>`;
+}
+
+/* ─── ADMIN ─── */
+function adminTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach((b,i)=>b.classList.remove('active'));
+  document.querySelectorAll('.admin-tab')[['publish','chapters','manage'].indexOf(tab)].classList.add('active');
+  document.getElementById('admin-publish').style.display = tab === 'publish' ? 'block' : 'none';
+  document.getElementById('admin-chapters').style.display = tab === 'chapters' ? 'block' : 'none';
+  document.getElementById('admin-manage').style.display = tab === 'manage' ? 'block' : 'none';
+  if (tab === 'manage') renderAdminManage();
+  if (tab === 'chapters') populateChapterSelect();
+}
+
+function publishManga() {
+  const title = document.getElementById('pub-title').value.trim();
+  const author = document.getElementById('pub-author').value.trim();
+  const status = document.getElementById('pub-status').value;
+  const type = document.getElementById('pub-type').value;
+  const genres = document.getElementById('pub-genres').value.split(',').map(g=>g.trim()).filter(Boolean);
+  const cover = document.getElementById('pub-cover').value.trim();
+  const desc = document.getElementById('pub-desc').value.trim();
+
+  if (!title) { showToast('Please enter a manga title.', 'error'); return; }
+
+  const newManga = {
+    id: Date.now(),
+    title, author: author || 'Unknown', type, status,
+    genres: genres.length ? genres : ['General'],
+    cover: cover || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
+    description: desc || 'No description available.',
+    chapters: [],
+    views: 0,
+    comments: [],
+  };
+
+  state.manga.unshift(newManga);
+  saveData();
+
+  document.getElementById('publish-success').style.display = 'block';
+  setTimeout(() => document.getElementById('publish-success').style.display = 'none', 3000);
+  document.getElementById('pub-title').value = '';
+  document.getElementById('pub-author').value = '';
+  document.getElementById('pub-genres').value = '';
+  document.getElementById('pub-cover').value = '';
+  document.getElementById('pub-desc').value = '';
+  populateChapterSelect();
+  showToast(`"${title}" published!`, 'success');
+}
+
+function populateChapterSelect() {
+  const sel = document.getElementById('ch-manga-select');
+  if (!sel) return;
+  sel.innerHTML = state.manga.map(m => `<option value="${m.id}">${m.title}</option>`).join('');
+}
+
+function addChapter() {
+  const mangaId = parseInt(document.getElementById('ch-manga-select').value);
+  const number = parseInt(document.getElementById('ch-number').value);
+  const title = document.getElementById('ch-title').value.trim();
+  const pagesRaw = document.getElementById('ch-pages').value.trim();
+
+  if (!mangaId || !number) { showToast('Please fill required fields.', 'error'); return; }
+
+  const manga = state.manga.find(m => m.id === mangaId);
+  const pages = pagesRaw ? pagesRaw.split('\n').map(p=>p.trim()).filter(Boolean) : [];
+
+  manga.chapters.push({
+    number,
+    title: title || `Chapter ${number}`,
+    date: new Date().toISOString().split('T')[0],
+    pages,
+  });
+  manga.chapters.sort((a,b) => a.number - b.number);
+  saveData();
+
+  document.getElementById('chapter-success').style.display = 'block';
+  setTimeout(() => document.getElementById('chapter-success').style.display = 'none', 3000);
+  document.getElementById('ch-number').value = '';
+  document.getElementById('ch-title').value = '';
+  document.getElementById('ch-pages').value = '';
+  showToast(`Chapter ${number} added to "${manga.title}"!`, 'success');
+}
+
+function renderAdminManage() {
+  const el = document.getElementById('admin-manga-list');
+  if (!el) return;
+  el.innerHTML = state.manga.map(m => `
+    <div class="manga-list-item">
+      <span>${m.title} <span style="opacity:0.5;">(${m.type} · ${m.chapters.length} ch · ${formatViews(m.views)} views)</span></span>
+      <button class="delete-btn" onclick="deleteManga(${m.id})">Delete</button>
+    </div>
+  `).join('') || '<p style="color:rgba(255,255,255,0.3);font-style:italic;">No manga published yet.</p>';
+}
+
+function deleteManga(id) {
+  if (!confirm('Delete this manga and all its chapters?')) return;
+  state.manga = state.manga.filter(m => m.id !== id);
+  saveData();
+  renderAdminManage();
+  populateChapterSelect();
+  showToast('Manga deleted.', 'error');
+}
+
+/* ─── TOAST ─── */
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type}`;
+  t.classList.add('show');
+  clearTimeout(t._timeout);
+  t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ─── UTILS ─── */
+function escapeHTML(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ─── INIT ─── */
+updateNavUser();
+renderHome();
+
+// Close modal on overlay click
+document.getElementById('auth-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal('auth-modal');
+});
+
+// Make functions global for onclick handlers
+window.showView = showView;
+window.goBack = goBack;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.switchTab = switchTab;
+window.doLogin = doLogin;
+window.doRegister = doRegister;
+window.logout = logout;
+window.doSearch = doSearch;
+window.showGenre = showGenre;
+window.openManga = openManga;
+window.readChapter = readChapter;
+window.toggleLibrary = toggleLibrary;
+window.postComment = postComment;
+window.publishManga = publishManga;
+window.addChapter = addChapter;
+window.deleteManga = deleteManga;
+window.adminTab = adminTab;
+window.renderAdminManage = renderAdminManage;
+window.__moduleLoaded = true;
+</script>
+
+<!-- Stub script: creates placeholder functions before module loads -->
+<script>
+(function() {
+  const fns = ['showView','goBack','openModal','closeModal','switchTab','doLogin',
+    'doRegister','logout','doSearch','showGenre','openManga','readChapter',
+    'toggleLibrary','postComment','publishManga','addChapter','deleteManga',
+    'adminTab','renderAdminManage'];
+  fns.forEach(fn => {
+    window[fn] = function(...args) {
+      // Wait for module to load then call
+      const interval = setInterval(() => {
+        if (window.__moduleLoaded) {
+          clearInterval(interval);
+          window[fn](...args);
+        }
+      }, 50);
+    };
+  });
+})();
+</script>
+</body>
+</html>
