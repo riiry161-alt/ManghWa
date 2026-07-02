@@ -38,11 +38,20 @@ REQUEST_DELAY = 0.3               # secondes entre 2 appels API (MangaDex tolèr
 # INIT FIREBASE (clé de service via variable d'environnement)
 # ----------------------------------------------------------------------
 def init_firestore():
-    b64_key = os.environ.get("FIREBASE_SERVICE_ACCOUNT_B64")
-    if not b64_key:
-        print("ERREUR: variable d'environnement FIREBASE_SERVICE_ACCOUNT_B64 manquante.")
-        sys.exit(1)
-    key_json = json.loads(base64.b64decode(b64_key))
+    # Option simple (recommandée) : coller directement le contenu du fichier .json
+    # tel quel dans le secret GitHub FIREBASE_SERVICE_ACCOUNT_JSON.
+    raw_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON")
+    if raw_json:
+        key_json = json.loads(raw_json)
+    else:
+        # Option alternative : version encodée en base64, si tu préfères ça.
+        b64_key = os.environ.get("FIREBASE_SERVICE_ACCOUNT_B64")
+        if not b64_key:
+            print("ERREUR: aucune des deux variables d'environnement "
+                  "(FIREBASE_SERVICE_ACCOUNT_JSON ou FIREBASE_SERVICE_ACCOUNT_B64) n'est définie.")
+            sys.exit(1)
+        key_json = json.loads(base64.b64decode(b64_key))
+
     cred = credentials.Certificate(key_json)
     firebase_admin.initialize_app(cred)
     return firestore.client()
