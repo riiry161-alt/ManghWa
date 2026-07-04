@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MangaTrack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --paper:#fafafa; --ink:#0b0b10; --violet:#6d28d9; --violet-deep:#4c1d95;
+  --violet-soft:#a78bfa; --lavender:#f3eeff; --muted:#6b6a76; --border:#e6e2f2; --card:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+h1,h2,h3{font-family:'Unbounded',sans-serif}
+.mono{font-family:'JetBrains Mono',monospace}
+
+header{background:var(--paper);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:-0.02em;cursor:pointer;display:flex;align-items:center;gap:0.4rem}
+.logo .dot{width:8px;height:8px;border-radius:50%;background:var(--violet);display:inline-block}
+nav{display:flex;gap:1.75rem;align-items:center}
+nav a,.nav-btn{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;cursor:pointer;background:none;border:none;opacity:0.6;transition:opacity 0.2s}
+nav a:hover,.nav-btn:hover{opacity:1;color:var(--violet)}
+.btn{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.55rem 1.1rem;border:1.5px solid var(--ink);cursor:pointer;background:none;border-radius:2px;transition:all 0.2s}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.btn-violet{background:var(--violet);color:#fff;border-color:var(--violet)}
+.btn-violet:hover{background:var(--violet-deep);border-color:var(--violet-deep)}
+.btn-ghost{background:none;color:var(--ink);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--ink)}
+.nav-user{display:flex;gap:0.65rem;align-items:center}
+
+.hero{background:var(--ink);color:#fff;padding:4.5rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(109,40,217,0.35),transparent 70%);border-radius:50%}
+.hero-inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet-soft);margin-bottom:1rem}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em}
+.hero h1 em{font-style:normal;color:var(--violet-soft)}
+.hero p{margin-top:1rem;font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:560px;margin-left:auto;margin-right:auto}
+.search-bar{display:flex;max-width:520px;margin:2rem auto 0;border-radius:3px;overflow:hidden}
+.search-bar input{flex:1;padding:0.85rem 1.1rem;font-family:'Inter',sans-serif;font-size:0.98rem;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.18);border-right:none;color:#fff;outline:none}
+.search-bar input::placeholder{color:rgba(255,255,255,0.35)}
+.search-bar button{padding:0.85rem 1.4rem;background:var(--violet);color:#fff;border:1.5px solid var(--violet);font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer}
+.search-bar button:hover{background:var(--violet-deep)}
+.genre-pills{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:1.4rem}
+.pill{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.32rem 0.85rem;border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.55);cursor:pointer;border-radius:20px;transition:all 0.2s}
+.pill:hover{border-color:var(--violet-soft);color:#fff}
+
+main{max-width:1300px;margin:0 auto;padding:3rem 2rem}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.4rem}
+.section-header h2{font-size:1.3rem;font-weight:800;letter-spacing:-0.01em}
+.section-header a{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--violet);text-decoration:none;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer}
+
+.manga-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1.4rem}
+.manga-card{cursor:pointer}
+.card-cover{aspect-ratio:2/3;overflow:hidden;position:relative;background:var(--lavender);border-radius:6px;border:1px solid var(--border)}
+.card-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.stamp{position:absolute;top:0.5rem;right:0.5rem;width:38px;height:38px;border-radius:50%;background:var(--violet);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;transform:rotate(12deg);opacity:0;transition:opacity 0.2s,transform 0.2s;box-shadow:0 3px 8px rgba(0,0,0,0.25)}
+.manga-card:hover .stamp{opacity:1;transform:rotate(0deg)}
+.card-badge{position:absolute;top:0.5rem;left:0.5rem;background:var(--ink);color:#fff;font-family:'JetBrains Mono',monospace;font-size:0.58rem;padding:0.18rem 0.5rem;letter-spacing:0.04em;text-transform:uppercase;border-radius:20px}
+.card-badge.ongoing{background:var(--violet)}
+.card-badge.completed{background:#3a3a44}
+.card-info{padding:0.65rem 0.1rem}
+.card-title{font-size:0.9rem;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--muted);margin-top:0.25rem}
+
+.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:3.5rem}
+.featured-card{position:relative;aspect-ratio:16/7;overflow:hidden;cursor:pointer;border-radius:8px;background:var(--ink)}
+.featured-card img{width:100%;height:100%;object-fit:cover;filter:brightness(0.55);transition:transform 0.4s}
+.featured-card:hover img{transform:scale(1.04)}
+.featured-card .overlay{position:absolute;bottom:0;left:0;right:0;padding:1.4rem;background:linear-gradient(transparent,rgba(0,0,0,0.85));color:#fff}
+.featured-card .overlay h3{font-size:1.3rem;font-weight:800}
+.featured-card .overlay p{font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:0.2rem}
+
+.reader-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.reader-header h2{font-size:1.5rem;font-weight:800}
+.back-btn{font-family:'JetBrains Mono',monospace;font-size:0.68rem;cursor:pointer;color:var(--violet);letter-spacing:0.04em;text-transform:uppercase;background:none;border:none}
+.reader-info{display:flex;gap:2.2rem;margin-bottom:2rem}
+.reader-cover{width:180px;flex-shrink:0}
+.reader-cover img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;border-radius:8px;border:1px solid var(--border)}
+.reader-details{flex:1}
+.reader-details h3{font-size:1.7rem;font-weight:800;letter-spacing:-0.01em}
+.genre-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin:0.7rem 0}
+.genre-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:0.22rem 0.6rem;background:var(--lavender);color:var(--violet-deep);text-transform:uppercase;letter-spacing:0.04em;border-radius:20px}
+.reader-desc{font-size:0.98rem;line-height:1.65;color:#333;margin:0.8rem 0 1.2rem}
+.reader-actions{display:flex;gap:0.75rem;flex-wrap:wrap}
+.source-note{margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem}
+
+.comments-section{margin-top:2.5rem}
+.comments-section h4{font-size:1.1rem;font-weight:700;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.comment-form textarea{width:100%;padding:0.75rem 1rem;font-family:'Inter',sans-serif;font-size:0.95rem;border:1.5px solid var(--border);border-radius:6px;background:var(--card);resize:vertical;min-height:80px;outline:none}
+.comment-form textarea:focus{border-color:var(--violet)}
+.comment-form .form-footer{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem}
+.comment-form small{color:var(--muted);font-size:0.8rem}
+.comment{padding:1rem;border-left:2px solid var(--border);margin-bottom:0.9rem;background:var(--card)}
+.comment.admin-comment{border-left-color:var(--violet)}
+.comment-header{display:flex;justify-content:space-between;margin-bottom:0.4rem}
+.comment-author{font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;text-transform:uppercase}
+.comment-author.is-admin{color:var(--violet)}
+.comment-date{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--muted)}
+.comment-body{font-size:0.92rem;line-height:1.6}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,11,16,0.7);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--paper);border-radius:12px;width:100%;max-width:440px;padding:2.4rem;position:relative;animation:slideUp 0.25s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:1rem;right:1.2rem;font-size:1.3rem;cursor:pointer;color:var(--muted);background:none;border:none}
+.modal-close:hover{color:var(--violet)}
+.modal-tabs{display:flex;margin-bottom:1.5rem;background:var(--lavender);border-radius:8px;padding:0.25rem}
+.modal-tab{flex:1;padding:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em;text-align:center;cursor:pointer;background:none;border:none;color:var(--muted);border-radius:6px;transition:all 0.2s}
+.modal-tab.active{background:var(--violet);color:#fff}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);margin-bottom:0.35rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:0.65rem 0.9rem;font-family:'Inter',sans-serif;font-size:0.95rem;border:1.5px solid var(--border);border-radius:6px;background:var(--card);outline:none;transition:border-color 0.2s;color:var(--ink)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--violet)}
+.form-error{color:#c0392b;font-family:'JetBrains Mono',monospace;font-size:0.65rem;margin-top:0.4rem;min-height:1.1em}
+
+.admin-panel{background:var(--ink);color:#f2f0f7;padding:2.4rem;border-radius:12px}
+.admin-panel h2{font-size:1.5rem;color:#fff;margin-bottom:1.8rem}
+.admin-tabs{display:flex;gap:0.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.admin-tab{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.5rem 1.1rem;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);cursor:pointer;background:none;border-radius:20px;transition:all 0.2s}
+.admin-tab.active{border-color:var(--violet-soft);color:var(--violet-soft);background:rgba(109,40,217,0.15)}
+.admin-content label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.35rem}
+.admin-content input,.admin-content select,.admin-content textarea{width:100%;padding:0.65rem 0.9rem;font-family:'Inter',sans-serif;font-size:0.95rem;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.15);color:#fff;border-radius:6px;margin-bottom:1rem;outline:none}
+.admin-content input:focus,.admin-content select:focus,.admin-content textarea:focus{border-color:var(--violet-soft)}
+.admin-content textarea{min-height:100px;resize:vertical}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.admin-success{background:rgba(109,40,217,0.18);border:1px solid var(--violet-soft);color:#c9b8f7;font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:0.6rem 1rem;margin-bottom:1rem;display:none;border-radius:6px}
+.manga-list-item{display:flex;justify-content:space-between;align-items:center;padding:0.7rem 1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:0.4rem;border-radius:6px}
+.manga-list-item span{font-family:'JetBrains Mono',monospace;font-size:0.7rem}
+.admin-actions{display:flex;gap:0.4rem}
+.mini-btn{font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:0.25rem 0.6rem;cursor:pointer;text-transform:uppercase;border-radius:4px;border:1px solid;background:none}
+.mini-btn.edit{border-color:var(--violet-soft);color:var(--violet-soft)}
+.mini-btn.edit:hover{background:rgba(109,40,217,0.2)}
+.mini-btn.del{border-color:#c0392b;color:#e57368}
+.mini-btn.del:hover{background:rgba(192,57,43,0.2)}
+
+.library-empty{text-align:center;padding:4rem 2rem;color:var(--muted)}
+.library-empty .big-icon{font-size:3.5rem;display:block;margin-bottom:1rem}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink);color:#fff;padding:0.85rem 1.4rem;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.04em;border-left:3px solid var(--violet);z-index:1000;transform:translateX(200%);transition:transform 0.3s;max-width:320px;border-radius:4px}
+.toast.show{transform:translateX(0)}
+.toast.success{border-left-color:#22c55e}
+.toast.error{border-left-color:#e53e3e}
+.loading-spinner{text-align:center;padding:3rem;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.08em}
+footer{background:var(--ink);color:rgba(255,255,255,0.35);padding:3rem 2rem 2rem;margin-top:4rem}
+.footer-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem}
+.footer-brand p{font-size:0.85rem;line-height:1.6;margin-top:0.6rem}
+footer h5{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.55);margin-bottom:1rem}
+footer ul{list-style:none}
+footer ul li{margin-bottom:0.5rem}
+footer ul a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.85rem;cursor:pointer}
+footer ul a:hover{color:var(--violet-soft)}
+.footer-bottom{max-width:1300px;margin:2rem auto 0;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:0.6rem}
+.search-results-header{margin-bottom:1.4rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border)}
+.search-results-header h2{font-size:1.4rem;font-weight:800}
+.search-results-header p{color:var(--muted);margin-top:0.2rem;font-size:0.85rem}
+.no-results{text-align:center;padding:4rem 2rem;color:var(--muted)}
+.no-results big{display:block;font-size:2.6rem;margin-bottom:1rem}
+@media(max-width:768px){.featured-grid,.admin-grid{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr 1fr}.reader-info{flex-direction:column}.reader-cover{width:130px}header{padding:0 1rem}main{padding:2rem 1rem}}
+@media(max-width:480px){.footer-inner{grid-template-columns:1fr}nav a{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="showView('home')"><span class="dot"></span>MangaTrack</div>
+  <nav>
+    <a onclick="showView('home')">Discover</a>
+    <a onclick="showGenre('Action')">New</a>
+    <a onclick="showView('library')">My List</a>
+    <div class="nav-user" id="nav-user">
+      <button class="btn btn-ghost" onclick="openModal('login')">Sign In</button>
+      <button class="btn btn-violet" onclick="openModal('register')">Sign Up</button>
+    </div>
+    <div class="nav-user" id="nav-logged" style="display:none;">
+      <span id="nav-username" class="nav-btn" style="opacity:1;cursor:default;"></span>
+      <button class="nav-btn" onclick="showView('library')">My List</button>
+      <button class="nav-btn admin-only" style="display:none;" onclick="showView('admin')">Admin</button>
+      <button class="btn btn-ghost" onclick="doLogout()">Log Out</button>
+    </div>
+  </nav>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('auth-modal')">&#x2715;</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+      <button class="modal-tab" id="tab-register" onclick="switchTab('register')">Sign Up</button>
+    </div>
+    <div id="login-form">
+      <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label>Password</label><input type="password" id="login-password" placeholder="••••••••"/></div>
+      <div class="form-error" id="login-error"></div><br/>
+      <button class="btn btn-violet" id="btn-login" style="width:100%;padding:0.75rem;" onclick="doLogin()">Sign In</button>
+    </div>
+    <div id="register-form" style="display:none;">
+      <div class="form-group"><label>Username</label><input type="text" id="reg-username" placeholder="TonUsername"/></div>
+      <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label>Password</label><input type="password" id="reg-password" placeholder="••••••••"/></div>
+      <div class="form-group"><label>Confirm</label><input type="password" id="reg-confirm" placeholder="••••••••"/></div>
+      <div class="form-error" id="reg-error"></div><br/>
+      <button class="btn btn-violet" id="btn-register" style="width:100%;padding:0.75rem;" onclick="doRegister()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<div id="home-view">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Track your reads — no hosting</div>
+      <h1>Track your series.<br/><em>Read at the source.</em></h1>
+      <p>MangaTrack builds your list, keeps your progress, and sends you to read every chapter directly at the original source.</p>
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search a title, an author..." onkeydown="if(event.key==='Enter')doSearch()"/>
+        <button onclick="doSearch()">Search</button>
+      </div>
+      <div class="genre-pills">
+        <span class="pill" onclick="showGenre('Action')">Action</span>
+        <span class="pill" onclick="showGenre('Romance')">Romance</span>
+        <span class="pill" onclick="showGenre('Fantasy')">Fantasy</span>
+        <span class="pill" onclick="showGenre('Horror')">Horror</span>
+        <span class="pill" onclick="showGenre('Comedy')">Comedy</span>
+        <span class="pill" onclick="showGenre('Sci-Fi')">Sci-Fi</span>
+        <span class="pill" onclick="showGenre('Slice of Life')">Slice of Life</span>
+        <span class="pill" onclick="showGenre('Thriller')">Thriller</span>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="section-header"><h2>Featured</h2></div>
+    <div class="featured-grid" id="featured-grid"><div class="loading-spinner">Loading…</div></div>
+    <div class="section-header"><h2>Latest Updates</h2><a onclick="doSearch('')">View All &#x2192;</a></div>
+    <div class="manga-grid" id="latest-grid"><div class="loading-spinner">Loading…</div></div>
+    <div class="section-header" style="margin-top:3rem;"><h2>Most Followed</h2></div>
+    <div class="manga-grid" id="popular-grid"><div class="loading-spinner">Loading…</div></div>
+  </main>
+</div>
+
+<div id="search-view" style="display:none;">
+  <main>
+    <div class="search-results-header"><h2 id="search-title">Results</h2><p id="search-subtitle"></p></div>
+    <div class="manga-grid" id="search-grid"></div>
+    <div class="no-results" id="no-results" style="display:none;"><big>&#x1F50D;</big><p>No titles found.</p><br/><button class="btn btn-violet" onclick="showView('home')">Back</button></div>
+  </main>
+</div>
+
+<div id="reader-view" style="display:none;">
+  <main>
+    <div class="reader-header"><button class="back-btn" onclick="goBack()">&#x2190; Back</button><h2 id="reader-title"></h2></div>
+    <div id="reader-content"></div>
+  </main>
+</div>
+
+<div id="library-view" style="display:none;">
+  <main><div class="section-header"><h2>My List</h2></div><div id="library-content"></div></main>
+</div>
+
+<div id="admin-view" style="display:none;">
+  <main>
+    <div class="admin-panel">
+      <h2>Admin Panel</h2>
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="adminTab('publish')">Add a Title</button>
+        <button class="admin-tab" onclick="adminTab('manage')">Manage Titles</button>
+      </div>
+      <div id="admin-publish" class="admin-content">
+        <div class="admin-success" id="publish-success">Title saved!</div>
+        <input type="hidden" id="pub-editing-id" value=""/>
+        <div class="admin-grid">
+          <div>
+            <label>Title *</label><input type="text" id="pub-title" placeholder="e.g. Solo Leveling"/>
+            <label>Author</label><input type="text" id="pub-author" placeholder="Author's name"/>
+            <label>Status</label><select id="pub-status"><option value="ongoing">Ongoing</option><option value="completed">Completed</option><option value="hiatus">Hiatus</option></select>
+            <label>Type</label><select id="pub-type"><option value="Manga">Manga</option><option value="Manhwa">Manhwa</option><option value="Manhua">Manhua</option></select>
+          </div>
+          <div>
+            <label>Genres (comma-separated)</label><input type="text" id="pub-genres" placeholder="Action, Fantasy"/>
+            <label>Cover URL</label><input type="text" id="pub-cover" placeholder="https://..."/>
+            <label>Reading link (MangaDex, etc.)</label><input type="text" id="pub-source" placeholder="https://mangadex.org/title/..."/>
+            <label>Description</label><textarea id="pub-desc" placeholder="Synopsis..."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-violet" style="padding:0.75rem 2rem;" id="pub-submit-btn" onclick="publishManga()">Publish</button>
+        <button class="btn btn-ghost" style="padding:0.75rem 1.5rem;color:#fff;border-color:rgba(255,255,255,0.2);display:none;" id="pub-cancel-btn" onclick="cancelEdit()">Cancel edit</button>
+      </div>
+      <div id="admin-manage" class="admin-content" style="display:none;">
+        <p style="color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:1rem;font-size:0.88rem;">All published titles — editable anytime</p>
+        <div id="admin-manga-list"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo" style="color:#fff;"><span class="dot"></span>MangaTrack</span><p>Your manga, manhwa &amp; manhua tracking list. We index, you read at the source.</p></div>
+    <div><h5>Discover</h5><ul><li><a onclick="showGenre('Action')">Action</a></li><li><a onclick="showGenre('Romance')">Romance</a></li><li><a onclick="showGenre('Fantasy')">Fantasy</a></li><li><a onclick="showGenre('Horror')">Horror</a></li></ul></div>
+    <div><h5>Account</h5><ul><li><a onclick="openModal('register')">Sign Up</a></li><li><a onclick="openModal('login')">Sign In</a></li><li><a onclick="showView('library')">My List</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>2026 MangaTrack.</span><span>MANGA · MANHWA · MANHUA — VIA MANGADEX</span></div>
+</footer>
+
+<script>
+window.state = { currentUser:null, manga:[], currentView:'home', viewHistory:[], currentMangaId:null };
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc,
+  query, orderBy, arrayUnion, increment, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey:"AIzaSyAufe239XNAS-qa3GRVPITfpbAjNdxE38M",
+  authDomain:"manghwa-8c025.firebaseapp.com",
+  projectId:"manghwa-8c025",
+  storageBucket:"manghwa-8c025.firebasestorage.app",
+  messagingSenderId:"292887715913",
+  appId:"1:292887715913:web:fb93afd10822cc63d39f98"
+};
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function showToast(msg,type){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast'+(type?' '+type:''); t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+async function loadManga(){
+  try{
+    const snap = await getDocs(query(collection(db,'manga'), orderBy('createdAt','desc')));
+    state.manga = snap.docs.map(d=>({ id:d.id, ...d.data() }));
+  }catch(e){ console.error('loadManga:',e); state.manga=[]; }
+}
+
+window.publishManga = async function(){
+  if(!isAdmin()){ showToast('Admins only.','error'); return; }
+  const title = (document.getElementById('pub-title').value||'').trim();
+  if(!title){ showToast('Title is required.','error'); return; }
+  const editingId = document.getElementById('pub-editing-id').value;
+  const btn = document.getElementById('pub-submit-btn');
+  btn.disabled=true; btn.textContent = editingId ? 'Updating…' : 'Publishing…';
+
+  const payload = {
+    title,
+    author: (document.getElementById('pub-author').value||'Inconnu').trim(),
+    type: document.getElementById('pub-type').value,
+    status: document.getElementById('pub-status').value,
+    genres: (document.getElementById('pub-genres').value||'').split(',').map(g=>g.trim()).filter(Boolean),
+    cover: (document.getElementById('pub-cover').value||'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80').trim(),
+    sourceUrl: (document.getElementById('pub-source').value||'').trim(),
+    description: (document.getElementById('pub-desc').value||'No description.').trim(),
+  };
+
+  try{
+    if(editingId){
+      await updateDoc(doc(db,'manga',editingId), payload);
+      const idx = state.manga.findIndex(m=>m.id===editingId);
+      if(idx!==-1) state.manga[idx] = {...state.manga[idx], ...payload};
+      showToast('"'+title+'" updated!','success');
+      cancelEdit();
+    }else{
+      payload.comments=[]; payload.views=0; payload.createdAt=serverTimestamp();
+      const ref = await addDoc(collection(db,'manga'), payload);
+      payload.id = ref.id;
+      state.manga.unshift(payload);
+      showToast('"'+title+'" published!','success');
+      ['pub-title','pub-author','pub-genres','pub-cover','pub-source','pub-desc'].forEach(id=>{ document.getElementById(id).value=''; });
+    }
+    document.getElementById('publish-success').style.display='block';
+    setTimeout(()=>{ document.getElementById('publish-success').style.display='none'; },2500);
+  }catch(e){
+    console.error('publishManga:',e);
+    showToast('Error while saving.','error');
+  }finally{
+    btn.disabled=false; btn.textContent = editingId ? 'Update' : 'Publish';
+  }
+};
+
+window.deleteManga = async function(id){
+  if(!confirm('Delete this title?')) return;
+  try{
+    await deleteDoc(doc(db,'manga',id));
+    state.manga = state.manga.filter(m=>m.id!==id);
+    renderAdminManage();
+    showToast('Title deleted.','error');
+  }catch(e){ console.error('deleteManga:',e); showToast('Error deleting.','error'); }
+};
+
+async function incrementViews(id){ try{ await updateDoc(doc(db,'manga',id),{ views: increment(1) }); }catch(e){} }
+
+window.postComment = async function(mangaId){
+  if(!isLoggedIn()){ openModal('login'); return; }
+  const input = document.getElementById('comment-input');
+  const text = (input.value||'').trim();
+  if(!text) return;
+  const c = { user:state.currentUser.username, isAdmin:isAdmin(), text, date:new Date().toISOString().split('T')[0] };
+  try{
+    await updateDoc(doc(db,'manga',mangaId),{ comments: arrayUnion(c) });
+    const m = state.manga.find(x=>x.id===mangaId);
+    if(m) m.comments.push(c);
+    document.getElementById('comments-list').insertAdjacentHTML('afterbegin', commentHTML(c));
+    input.value='';
+    showToast('Comment posted!','success');
+  }catch(e){ console.error('postComment:',e); showToast('Error.','error'); }
+};
+
+window.toggleLibrary = async function(mangaId){
+  if(!isLoggedIn()){ openModal('register'); return; }
+  if(!Array.isArray(state.currentUser.library)) state.currentUser.library=[];
+  const idx = state.currentUser.library.indexOf(mangaId);
+  const inLib = idx===-1;
+  if(inLib) state.currentUser.library.push(mangaId); else state.currentUser.library.splice(idx,1);
+  try{ await setDoc(doc(db,'users',state.currentUser.uid), { library: state.currentUser.library }, { merge:true }); }
+  catch(e){ console.error('toggleLibrary:',e); }
+  showToast(inLib?'Added to your list!':'Removed from your list.', inLib?'success':'');
+  const btn=document.getElementById('lib-btn');
+  if(btn){
+    btn.innerHTML = inLib?'&#9733; Following':'&#9734; Follow';
+    btn.className = 'btn '+(inLib?'btn-violet':'btn-ghost');
+  }
+};
+
+window.doLogin = async function(){
+  const email=(document.getElementById('login-email').value||'').trim();
+  const pass=document.getElementById('login-password').value||'';
+  const errEl=document.getElementById('login-error');
+  const btn=document.getElementById('btn-login');
+  errEl.textContent='';
+  if(!email||!pass){ errEl.textContent='Please fill in all fields.'; return; }
+  btn.disabled=true; btn.textContent='Sign In…';
+  try{
+    const cred=await signInWithEmailAndPassword(auth,email,pass);
+    const uid=cred.user.uid;
+    const adminSnap=await getDoc(doc(db,'admins',uid));
+    const isAdm=adminSnap.exists() && adminSnap.data().isAdmin===true;
+    let username=isAdm?'Admin':email.split('@')[0]; let library=[];
+    if(!isAdm){
+      const userSnap=await getDoc(doc(db,'users',uid));
+      if(userSnap.exists()){
+        if(userSnap.data().username) username=userSnap.data().username;
+        if(Array.isArray(userSnap.data().library)) library=userSnap.data().library;
+      }
+    }
+    state.currentUser={uid,username,email,isAdmin:isAdm,library};
+    finishLogin();
+  }catch(e){ console.error('Login:',e.code); errEl.textContent='Incorrect email or password.'; }
+  finally{ btn.disabled=false; btn.textContent='Sign In'; }
+};
+
+window.doRegister = async function(){
+  const username=(document.getElementById('reg-username').value||'').trim();
+  const email=(document.getElementById('reg-email').value||'').trim();
+  const pass=document.getElementById('reg-password').value||'';
+  const confirm=document.getElementById('reg-confirm').value||'';
+  const errEl=document.getElementById('reg-error');
+  const btn=document.getElementById('btn-register');
+  errEl.textContent='';
+  if(!username||!email||!pass||!confirm){ errEl.textContent='All fields are required.'; return; }
+  if(pass!==confirm){ errEl.textContent='Passwords do not match.'; return; }
+  if(pass.length<6){ errEl.textContent='Minimum 6 characters.'; return; }
+  btn.disabled=true; btn.textContent='Creating…';
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,email,pass);
+    await setDoc(doc(db,'users',cred.user.uid),{username,email,library:[]});
+    state.currentUser={uid:cred.user.uid,username,email,isAdmin:false,library:[]};
+    ['reg-username','reg-email','reg-password','reg-confirm'].forEach(id=>{ document.getElementById(id).value=''; });
+    finishLogin();
+  }catch(e){
+    console.error('Register:',e.code);
+    if(e.code==='auth/email-already-in-use') errEl.textContent='This email is already in use.';
+    else if(e.code==='auth/invalid-email') errEl.textContent='Invalid email.';
+    else if(e.code==='auth/weak-password') errEl.textContent='Password trop faible.';
+    else errEl.textContent='Sign up failed.';
+  }finally{ btn.disabled=false; btn.textContent='Create Account'; }
+};
+
+window.doLogout = async function(){ await signOut(auth); state.currentUser=null; updateNavUser(); showView('home'); showToast('Logged out.'); };
+
+onAuthStateChanged(auth, async(user)=>{
+  if(user){
+    if(state.currentUser && state.currentUser.uid===user.uid) return;
+    const adminSnap=await getDoc(doc(db,'admins',user.uid));
+    const isAdm=adminSnap.exists() && adminSnap.data().isAdmin===true;
+    let username=user.email.split('@')[0], library=[];
+    if(isAdm){ username='Admin'; }
+    else{
+      const userSnap=await getDoc(doc(db,'users',user.uid));
+      if(userSnap.exists()){
+        if(userSnap.data().username) username=userSnap.data().username;
+        if(Array.isArray(userSnap.data().library)) library=userSnap.data().library;
+      }
+    }
+    state.currentUser={uid:user.uid,username,email:user.email,isAdmin:isAdm,library};
+    updateNavUser();
+  }else{ if(state.currentUser){ state.currentUser=null; updateNavUser(); } }
+});
+
+async function init(){ await loadManga(); renderHome(); }
+init();
+
+window._db_incrementViews = incrementViews;
+</script>
+
+<script>
+function isLoggedIn(){ return !!state.currentUser; }
+function isAdmin(){ return !!(state.currentUser && state.currentUser.isAdmin===true); }
+
+var ALL_VIEWS=['home-view','search-view','reader-view','library-view','admin-view'];
+function showView(name,push){
+  if(push!==false && state.currentView!==name) state.viewHistory.push(state.currentView);
+  state.currentView=name;
+  ALL_VIEWS.forEach(v=>document.getElementById(v).style.display='none');
+  if(name==='home'){ document.getElementById('home-view').style.display='block'; renderHome(); }
+  else if(name==='search'){ document.getElementById('search-view').style.display='block'; }
+  else if(name==='reader'){ document.getElementById('reader-view').style.display='block'; }
+  else if(name==='library'){ document.getElementById('library-view').style.display='block'; renderLibrary(); }
+  else if(name==='admin'){
+    if(!isAdmin()){ showToast('Admin access required.','error'); return; }
+    document.getElementById('admin-view').style.display='block';
+    renderAdminManage();
+  }
+  window.scrollTo(0,0);
+}
+function goBack(){ var prev=state.viewHistory.pop()||'home'; showView(prev,false); }
+
+function openModal(tab){
+  document.getElementById('login-error').textContent='';
+  document.getElementById('reg-error').textContent='';
+  document.getElementById('auth-modal').classList.add('open');
+  switchTab(tab||'login');
+}
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function switchTab(tab){
+  var isL=(tab==='login');
+  document.getElementById('login-form').style.display=isL?'block':'none';
+  document.getElementById('register-form').style.display=isL?'none':'block';
+  document.getElementById('tab-login').classList.toggle('active',isL);
+  document.getElementById('tab-register').classList.toggle('active',!isL);
+}
+function finishLogin(){ updateNavUser(); closeModal('auth-modal'); showToast('Welcome, '+state.currentUser.username+'!','success'); }
+function updateNavUser(){
+  var li=isLoggedIn();
+  document.getElementById('nav-user').style.display=li?'none':'flex';
+  document.getElementById('nav-logged').style.display=li?'flex':'none';
+  if(li){
+    document.getElementById('nav-username').textContent=state.currentUser.username;
+    document.querySelectorAll('.admin-only').forEach(b=>b.style.display=isAdmin()?'':'none');
+  }
+}
+
+function renderHome(){
+  renderFeatured();
+  renderGrid('latest-grid', state.manga.slice(0,6));
+  renderGrid('popular-grid', [...state.manga].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,6));
+}
+function renderFeatured(){
+  var el=document.getElementById('featured-grid');
+  var items=state.manga.slice(0,2);
+  if(!items.length){ el.innerHTML=''; return; }
+  el.innerHTML=items.map(m=>
+    '<div class="featured-card" onclick="openManga(\''+m.id+'\')"><img src="'+esc(m.cover)+'" alt="'+esc(m.title)+'" loading="lazy"/><div class="overlay"><h3>'+esc(m.title)+'</h3><p>'+esc(m.type)+' &middot; '+esc((m.genres||[]).slice(0,2).join(', '))+'</p></div></div>'
+  ).join('');
+}
+function renderGrid(elId,manga){
+  var el=document.getElementById(elId); if(!el) return;
+  el.innerHTML=manga.length ? manga.map(mangaCard).join('') : '<p style="color:var(--muted);font-style:italic;padding:1rem;">Rien ici pour l\'instant.</p>';
+}
+function mangaCard(m){
+  var sl=m.status==='ongoing'?'Ongoing':m.status==='completed'?'Completed':'Hiatus';
+  return '<div class="manga-card" onclick="openManga(\''+m.id+'\')"><div class="card-cover"><img src="'+esc(m.cover)+'" alt="'+esc(m.title)+'" loading="lazy"/><span class="card-badge '+m.status+'">'+sl+'</span><span class="stamp">&#8599;</span></div><div class="card-info"><div class="card-title">'+esc(m.title)+'</div><div class="card-meta">'+esc(m.type)+' &middot; '+esc(m.author||'')+'</div></div></div>';
+}
+
+function doSearch(override){
+  var raw=(override!==undefined)?override:(document.getElementById('search-input').value||'');
+  var q=raw.trim().toLowerCase();
+  var res=state.manga.filter(m=>
+    m.title.toLowerCase().includes(q)||
+    (m.author||'').toLowerCase().includes(q)||
+    (m.genres||[]).some(g=>g.toLowerCase().includes(q))||
+    (m.type||'').toLowerCase().includes(q)
+  );
+  document.getElementById('search-title').textContent=q?'Results pour "'+raw.trim()+'"':'Tous les titres';
+  document.getElementById('search-subtitle').textContent=res.length+' title'+(res.length!==1?'s':'')+' found';
+  document.getElementById('no-results').style.display=res.length===0?'block':'none';
+  renderGrid('search-grid',res);
+  showView('search');
+}
+function showGenre(g){ document.getElementById('search-input').value=g; doSearch(g); }
+
+function openManga(id){
+  var manga=state.manga.find(m=>m.id===id);
+  if(!manga) return;
+  state.currentMangaId=id;
+  manga.views=(manga.views||0)+1;
+  if(window._db_incrementViews) window._db_incrementViews(id);
+
+  var inLib=isLoggedIn()&&Array.isArray(state.currentUser.library)&&state.currentUser.library.indexOf(id)!==-1;
+  document.getElementById('reader-title').textContent=manga.title;
+
+  var libBtn=isLoggedIn()
+    ?'<button class="btn '+(inLib?'btn-violet':'btn-ghost')+'" id="lib-btn" onclick="toggleLibrary(\''+id+'\')">'+(inLib?'&#9733; Following':'&#9734; Follow')+'</button>'
+    :'<button class="btn btn-ghost" onclick="openModal(\'register\')">&#9734; Follow</button>';
+
+  var readBtn = manga.sourceUrl
+    ? '<a class="btn btn-violet" href="'+esc(manga.sourceUrl)+'" target="_blank" rel="noopener">Read at source &#8599;</a>'
+    : '';
+
+  var commentInput=isLoggedIn()
+    ?'<div class="comment-form"><textarea id="comment-input" placeholder="Share your thoughts..."></textarea><div class="form-footer"><small>Be respectful, avoid spoilers.</small><button class="btn btn-violet" onclick="postComment(\''+id+'\')">Publish</button></div></div>'
+    :'<div style="padding:1rem;background:var(--lavender);border-radius:8px;margin-bottom:1rem;font-style:italic;color:var(--muted);"><a onclick="openModal(\'login\')" style="color:var(--violet);cursor:pointer;text-decoration:underline;">Sign in</a> to comment.</div>';
+
+  var comments=(manga.comments||[]);
+  var commentsHTML=comments.length===0?'<p style="color:var(--muted);font-style:italic;">No comments yet. Be the first!</p>':comments.map(commentHTML).join('');
+
+  document.getElementById('reader-content').innerHTML=
+    '<div class="reader-info"><div class="reader-cover"><img src="'+esc(manga.cover)+'" alt="'+esc(manga.title)+'"/></div>'+
+    '<div class="reader-details"><h3>'+esc(manga.title)+'</h3>'+
+    '<div class="mono" style="font-size:0.72rem;color:var(--muted);margin-top:0.3rem;">par '+esc(manga.author)+' &middot; '+esc(manga.type)+' &middot; <span style="color:'+(manga.status==='ongoing'?'var(--violet)':'var(--muted)')+'">'+(manga.status==='ongoing'?'Ongoing':manga.status==='completed'?'Completed':'Hiatus')+'</span></div>'+
+    '<div class="genre-tags">'+(manga.genres||[]).map(g=>'<span class="genre-tag">'+esc(g)+'</span>').join('')+'</div>'+
+    '<p class="reader-desc">'+esc(manga.description)+'</p>'+
+    '<div class="reader-actions">'+readBtn+libBtn+'</div>'+
+    (manga.sourceUrl?'<div class="source-note">&#128279; Chapters are hosted and read on the source platform.</div>':'')+
+    '</div></div>'+
+    '<div class="comments-section"><h4>Commentaires ('+comments.length+')</h4>'+commentInput+'<div id="comments-list">'+commentsHTML+'</div></div>';
+
+  showView('reader');
+}
+function commentHTML(c){
+  return '<div class="comment'+(c.isAdmin?' admin-comment':'')+'"><div class="comment-header"><span class="comment-author'+(c.isAdmin?' is-admin':'')+'">'+esc(c.user)+'</span><span class="comment-date">'+esc(c.date)+'</span></div><div class="comment-body">'+esc(c.text)+'</div></div>';
+}
+
+function renderLibrary(){
+  var el=document.getElementById('library-content');
+  if(!isLoggedIn()){ el.innerHTML='<div class="library-empty"><span class="big-icon">&#x1F4DA;</span><p>Sign in to access your list.</p><br/><button class="btn btn-violet" onclick="openModal(\'register\')">Sign Up</button></div>'; return; }
+  var lib=Array.isArray(state.currentUser.library)?state.currentUser.library:[];
+  var saved=state.manga.filter(m=>lib.indexOf(m.id)!==-1);
+  if(!saved.length){ el.innerHTML='<div class="library-empty"><span class="big-icon">&#x1F4D6;</span><p>Your list is empty. Start following titles!</p><br/><button class="btn btn-violet" onclick="showView(\'home\')">Discover</button></div>'; return; }
+  el.innerHTML='<div class="manga-grid">'+saved.map(mangaCard).join('')+'</div>';
+}
+
+function adminTab(tab){
+  ['publish','manage'].forEach((t,i)=>{
+    document.querySelectorAll('.admin-tab')[i].classList.toggle('active',t===tab);
+    document.getElementById('admin-'+t).style.display=t===tab?'block':'none';
+  });
+  if(tab==='manage') renderAdminManage();
+}
+function renderAdminManage(){
+  var el=document.getElementById('admin-manga-list'); if(!el) return;
+  el.innerHTML=state.manga.length===0
+    ?'<p style="color:rgba(255,255,255,0.3);font-style:italic;">No titles published yet.</p>'
+    :state.manga.map(m=>'<div class="manga-list-item"><span>'+esc(m.title)+' <span style="opacity:0.5;">('+esc(m.type)+')</span></span><div class="admin-actions"><button class="mini-btn edit" onclick="editManga(\''+m.id+'\')">Edit</button><button class="mini-btn del" onclick="deleteManga(\''+m.id+'\')">Delete</button></div></div>').join('');
+}
+function editManga(id){
+  var m=state.manga.find(x=>x.id===id); if(!m) return;
+  document.getElementById('pub-editing-id').value=id;
+  document.getElementById('pub-title').value=m.title||'';
+  document.getElementById('pub-author').value=m.author||'';
+  document.getElementById('pub-status').value=m.status||'ongoing';
+  document.getElementById('pub-type').value=m.type||'Manga';
+  document.getElementById('pub-genres').value=(m.genres||[]).join(', ');
+  document.getElementById('pub-cover').value=m.cover||'';
+  document.getElementById('pub-source').value=m.sourceUrl||'';
+  document.getElementById('pub-desc').value=m.description||'';
+  document.getElementById('pub-submit-btn').textContent='Update';
+  document.getElementById('pub-cancel-btn').style.display='inline-block';
+  adminTab('publish');
+}
+function cancelEdit(){
+  document.getElementById('pub-editing-id').value='';
+  ['pub-title','pub-author','pub-genres','pub-cover','pub-source','pub-desc'].forEach(id=>{ document.getElementById(id).value=''; });
+  document.getElementById('pub-submit-btn').textContent='Publish';
+  document.getElementById('pub-cancel-btn').style.display='none';
+}
+
+updateNavUser();
+document.getElementById('auth-modal').addEventListener('click',function(e){ if(e.target===this) closeModal('auth-modal'); });
+</script>
+</body>
+</html>
